@@ -30,6 +30,9 @@ class TestOfPairtree extends UnitTestCase {
     $this->assertEqual(Pairtree::encode('what-the-*@?#!^!?'), "what-the-^2a@^3f#!^5e!^3f");
   }
 
+  function test_weird() {
+    $this->assertEqual(Pairtree::encode('\\"*+,<=>?^|'), "^5c^22^2a^2b^2c^3c^3d^3e^3f^5e^7c");
+  }
 }
 
 ?>
