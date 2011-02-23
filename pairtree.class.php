@@ -10,18 +10,22 @@ class Pairtree {
   }
   
   public function decode($identifier) {
-  
+    $decode_regex = "/\\^(..)/";
+    $decoded_string = str_replace(array('=','+',','), array('/',':','.'), $identifier);
+    $decoded_string = preg_replace_callback($decode_regex, 'Pairtree::hextostr', $decoded_string);
+    return $decoded_string;
   }
   
   private function hextostr($matches) {
-    $s=''; 
+    $s= '';
+    $x = trim($matches[0],'^');
     foreach(explode("\n",trim(chunk_split($x,2))) as $h) $s.=chr(hexdec($h)); 
     return($s); 
   } 
 
   private function strtohex($matches) { 
-    $s='';
-    $x=$matches[0];
+    $s= '';
+    $x= $matches[0];
     foreach(str_split($x) as $c) $s.= '^'.sprintf("%02x",ord($c)); 
     return($s); 
   } 
