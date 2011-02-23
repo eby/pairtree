@@ -13,11 +13,13 @@ class TestOfPairtree extends UnitTestCase {
   function test_a() {
     $this->assertEqual(Pairtree::encode('a'),'a');
     $this->assertRoundtrip('a');
+    $this->assertEqual(Pairtree::id_to_path('a'),'a');
   }
   
   function test_space() {
     $this->assertEqual(Pairtree::encode('hello world'), 'hello^20world');
     $this->assertRoundtrip('hello world');
+    $this->assertEqual(Pairtree::id_to_path('hello world'),'he/ll/o^/20/wo/rl/d');
   }
   
   function test_slash() {
@@ -38,6 +40,7 @@ class TestOfPairtree extends UnitTestCase {
   function test_weird() {
     $this->assertEqual(Pairtree::encode('\\"*+,<=>?^|'), "^5c^22^2a^2b^2c^3c^3d^3e^3f^5e^7c");
     $this->assertRoundtrip('\\"*+,<=>?^|');
+    $this->assertEqual(Pairtree::id_to_path('\\"*+,<=>?^|'),"^5/c^/22/^2/a^/2b/^2/c^/3c/^3/d^/3e/^3/f^/5e/^7/c");
   }
   
   function test_hardcore_unicode() {

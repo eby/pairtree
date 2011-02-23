@@ -28,6 +28,13 @@ class Pairtree {
     $x= $matches[0];
     foreach(str_split($x) as $c) $s.= '^'.sprintf("%02x",ord($c)); 
     return($s); 
+  }
+  
+  public function id_to_path($identifier) {
+    $encoded_identifier = self::encode($identifier);
+    $number = preg_match_all('/..?/',$encoded_identifier,$matches);
+    $path = implode('/', $matches[0]);
+    return $path;
   } 
 
 }
