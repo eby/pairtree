@@ -3,7 +3,7 @@
 class Pairtree {
  
   public function encode($identifier) {
-    $encode_regex = "/[\"*+,<=>?\\^|]|[^\x21-\x7e]/";
+    $encode_regex = "/[\"*+,<=>?\\\^|]|[^\x21-\x7e]/";
     $escaped_string = preg_replace_callback($encode_regex, 'Pairtree::strtohex', $identifier);
     $escaped_string = str_replace(array('/',':','.'), array('=','+',','),$escaped_string);
     return $escaped_string;
