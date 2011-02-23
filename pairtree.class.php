@@ -35,6 +35,12 @@ class Pairtree {
     $number = preg_match_all('/..?/',$encoded_identifier,$matches);
     $path = implode('/', $matches[0]);
     return $path;
+  }
+  
+  public function path_to_id($path) {
+    $encoded_identifier = implode('',explode('/',$path));
+    $identifier = self::decode($encoded_identifier);
+    return $identifier;
   } 
 
 }
